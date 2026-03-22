@@ -749,23 +749,23 @@ function buildPDF(data){
 
   var pages=[],c=[],ry2=0,RH=16,BOTTOM=60;
   var cols=[M,M+215,M+290,M+345,M+400];
-  var tTop=H-295;
+  var tTop=H-240;
 
   function flushPage(){pages.push(c.join("\n"));c=[];}
 
   function drawHeader(firstPage){
     // Logo: 150pt wide, ~104pt tall, placed top-left with margin
-    c.push(imgOp(M,H-102,dispW,dispH)); // center aligns with INVOICE title
+    c.push(imgOp(M,H-M-dispH,dispW,dispH)); // top aligns with INVOICE title
     // Contact info below logo
     var contact=["Dan Skeen","410-952-2712","skeensound@gmail.com","200 Aigburth rd.","Towson, MD 21286"];
-    var cy=H-102-dispH-14;
+    var cy=H-M-dispH-12;
     for(var i=0;i<contact.length;i++){c.push(tx(contact[i],M,cy,"Helvetica",7.5,0.3));cy-=10;}
     // INVOICE / PROPOSAL title top right
     c.push(txR(docType.toUpperCase(),W-M,H-M,"Helvetica",26,0));
     if(data.invNum){c.push(txR("No. "+data.invNum,W-M,H-M-18,"Helvetica-Bold",10,0));}
     if(firstPage){
-      var ry=H-M-32;
-      if(data.invNum) ry=H-M-46;
+      var ry=H-M-20;
+      if(data.invNum) ry=H-M-34;
       if(data.client){c.push(txR("Client: "+data.client,W-M,ry,"Helvetica",9,0.2));ry-=13;}
       if(data.project){c.push(txR("Project: "+data.project,W-M,ry,"Helvetica",9,0.2));}
     }
