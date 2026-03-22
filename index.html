@@ -764,7 +764,8 @@ function buildPDF(data){
     c.push(txR(docType.toUpperCase(),W-M,H-72,"Helvetica",26,0));
     if(data.invNum){c.push(txR("No. "+data.invNum,W-M,H-90,"Helvetica-Bold",10,0));}
     if(firstPage){
-      var ry=H-106;
+      var ry=H-100;
+      if(data.invNum) ry=H-114;
       if(data.client){c.push(tx("Client: "+data.client,W-M-200,ry,"Helvetica",9,0.2));ry-=13;}
       if(data.project){c.push(tx("Project: "+data.project,W-M-200,ry,"Helvetica",9,0.2));}
     }
