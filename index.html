@@ -75,12 +75,12 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.8) sepi
 .iscroll { flex: 1; overflow-y: auto; padding: 24px; display: flex; justify-content: center; background: #c0c0c0; }
 .inv { background: #fff; width: 100%; max-width: 660px; padding: 40px 46px 46px; box-shadow: 0 2px 16px rgba(0,0,0,0.25); color: #000; font-size: 12px; line-height: 1.4; min-height: 820px; }
 .itop { display: flex; justify-content: space-between; align-items: flex-start; }
-.ileft { display: flex; flex-direction: column; align-items: center; }
+.ileft { display: flex; flex-direction: column; align-items: flex-start; }
 .ilogo { width: 160px; height: auto; margin-bottom: 10px; }
-.icontact { font-size: 9.5px; color: #333; line-height: 1.8; text-align: center; }
-.iright { text-align: left; }
-.iword { font-size: 28px; font-weight: 300; letter-spacing: 5px; margin-bottom: 10px; }
-.iclient { font-size: 11px; color: #333; line-height: 1.7; }
+.icontact { font-size: 9.5px; color: #333; line-height: 1.8; text-align: left; }
+.iright { text-align: right; }
+.iword { font-size: 32px; font-weight: 700; letter-spacing: 3px; margin-bottom: 4px; }
+.iclient { font-size: 11px; color: #333; line-height: 1.7; text-align: right; }
 .itable { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 11.5px; }
 .itable thead tr { border-bottom: 1.5px solid #000; }
 .itable th { font-size: 10.5px; font-weight: bold; padding: 5px 7px; text-align: left; }
@@ -696,7 +696,7 @@ function render(){
   document.getElementById("invDoc").innerHTML=
     "<div class=\"itop\">"+
     "<div class=\"ileft\"><img class=\"ilogo\" src=\"data:image/jpeg;base64,"+LOGO+"\" alt=\"Skeen Sound\">"+
-    "<div class=\"icontact\" contenteditable=\"true\">Dan Skeen<br>410-952-2712<br>skeensound@gmail.com<br><br>200 Aigburth rd. Towson,<br>MD 21286</div></div>"+
+    "<div class=\"icontact\" contenteditable=\"true\">Dan Skeen<br>410-952-2712<br>skeensound@gmail.com<br>200 Aigburth rd., Towson, MD 21286</div></div>"+
     "<div class=\"iright\"><div class=\"iword\" contenteditable=\"true\">"+docType.toUpperCase()+"</div>"+(invNum?"<div style=\\\"font-size:12px;font-weight:600;color:#333;margin-bottom:8px\\\">No. "+invNum+"</div>":"")+
     "<div class=\"iclient\">"+clientHtml+"</div></div></div>"+
     "<table class=\"itable\"><thead><tr><th>Description</th><th class=\"r\">Unit Cost</th><th class=\"c\">Qty</th><th class=\"c\">Days</th><th class=\"r\">Total</th></tr></thead>"+
@@ -755,17 +755,17 @@ function buildPDF(data){
 
   function drawHeader(firstPage){
     // Logo: 150pt wide, ~104pt tall, placed top-left with margin
-    c.push(imgOp(M,H-76-dispH,dispW,dispH));
+    c.push(imgOp(M,H-M-dispH,dispW,dispH));
     // Contact info below logo
     var contact=["Dan Skeen","410-952-2712","skeensound@gmail.com","200 Aigburth rd.","Towson, MD 21286"];
-    var cy=H-76-dispH-14;
+    var cy=H-M-dispH-14;
     for(var i=0;i<contact.length;i++){c.push(tx(contact[i],M,cy,"Helvetica",7.5,0.3));cy-=10;}
     // INVOICE / PROPOSAL title top right
-    c.push(txR(docType.toUpperCase(),W-M,H-72,"Helvetica",26,0));
-    if(data.invNum){c.push(txR("No. "+data.invNum,W-M,H-90,"Helvetica-Bold",10,0));}
+    c.push(txR(docType.toUpperCase(),W-M,H-M,"Helvetica",26,0));
+    if(data.invNum){c.push(txR("No. "+data.invNum,W-M,H-M-18,"Helvetica-Bold",10,0));}
     if(firstPage){
-      var ry=H-100;
-      if(data.invNum) ry=H-114;
+      var ry=H-M-32;
+      if(data.invNum) ry=H-M-46;
       if(data.client){c.push(txR("Client: "+data.client,W-M,ry,"Helvetica",9,0.2));ry-=13;}
       if(data.project){c.push(txR("Project: "+data.project,W-M,ry,"Helvetica",9,0.2));}
     }
