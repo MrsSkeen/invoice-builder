@@ -759,7 +759,7 @@ function buildPDF(data){
     // Contact info below logo
     var contact=["Dan Skeen","410-952-2712","skeensound@gmail.com","200 Aigburth rd.","Towson, MD 21286"];
     var cy=H-76-dispH-14;
-    for(var i=0;i<contact.length;i++){c.push(txR(contact[i],M+dispW/2,cy,"Helvetica",7.5,0.3));cy-=10;}
+    for(var i=0;i<contact.length;i++){c.push(tx(contact[i],M,cy,"Helvetica",7.5,0.3));cy-=10;}
     // INVOICE / PROPOSAL title top right
     c.push(txR(docType.toUpperCase(),W-M,H-72,"Helvetica",26,0));
     if(data.invNum){c.push(txR("No. "+data.invNum,W-M,H-90,"Helvetica-Bold",10,0));}
