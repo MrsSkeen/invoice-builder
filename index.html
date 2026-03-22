@@ -749,16 +749,16 @@ function buildPDF(data){
 
   var pages=[],c=[],ry2=0,RH=16,BOTTOM=60;
   var cols=[M,M+215,M+290,M+345,M+400];
-  var tTop=H-265;
+  var tTop=H-295;
 
   function flushPage(){pages.push(c.join("\n"));c=[];}
 
   function drawHeader(firstPage){
     // Logo: 150pt wide, ~104pt tall, placed top-left with margin
-    c.push(imgOp(M,H-M-dispH,dispW,dispH));
+    c.push(imgOp(M,H-102,dispW,dispH)); // center aligns with INVOICE title
     // Contact info below logo
     var contact=["Dan Skeen","410-952-2712","skeensound@gmail.com","200 Aigburth rd.","Towson, MD 21286"];
-    var cy=H-M-dispH-14;
+    var cy=H-102-dispH-14;
     for(var i=0;i<contact.length;i++){c.push(tx(contact[i],M,cy,"Helvetica",7.5,0.3));cy-=10;}
     // INVOICE / PROPOSAL title top right
     c.push(txR(docType.toUpperCase(),W-M,H-M,"Helvetica",26,0));
