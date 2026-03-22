@@ -73,14 +73,14 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.8) sepi
 .dlbtn { background: #e8a000; color: #000; border: none; padding: 7px 16px; border-radius: 3px; font-size: 12px; font-weight: bold; cursor: pointer; }
 .dlbtn:hover { background: #f5b000; }
 .iscroll { flex: 1; overflow-y: auto; padding: 24px; display: flex; justify-content: center; background: #c0c0c0; }
-.inv { background: #fff; width: 100%; max-width: 660px; padding: 40px 46px 46px; box-shadow: 0 2px 16px rgba(0,0,0,0.25); color: #000; font-size: 12px; line-height: 1.4; min-height: 820px; }
-.itop { display: flex; justify-content: space-between; align-items: flex-start; }
-.ileft { display: flex; flex-direction: column; align-items: flex-start; }
-.ilogo { width: 160px; height: auto; margin-bottom: 10px; }
-.icontact { font-size: 9.5px; color: #333; line-height: 1.8; text-align: left; }
-.iright { text-align: right; }
-.iword { font-size: 32px; font-weight: 700; letter-spacing: 3px; margin-bottom: 4px; }
-.iclient { font-size: 11px; color: #333; line-height: 1.7; text-align: right; }
+.inv { background: #fff; width: 100%; max-width: 660px; padding: 20px 46px 46px 20px; box-shadow: 0 2px 16px rgba(0,0,0,0.25); color: #000; font-size: 12px; line-height: 1.4; min-height: 820px; }
+.itop { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
+.ileft { display: flex; flex-direction: column; align-items: flex-start; max-width: 220px; }
+.ilogo { width: 170px; height: auto; margin-bottom: 8px; }
+.icontact { font-size: 8.5px; color: #444; line-height: 1.75; text-align: left; }
+.iright { text-align: right; display: flex; flex-direction: column; align-items: flex-end; }
+.iword { font-size: 38px; font-weight: 400; letter-spacing: 3px; margin-bottom: 2px; color: #000; }
+.iclient { font-size: 10px; color: #333; line-height: 1.7; text-align: right; margin-top: 4px; }
 .itable { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 11.5px; }
 .itable thead tr { border-bottom: 1.5px solid #000; }
 .itable th { font-size: 10.5px; font-weight: bold; padding: 5px 7px; text-align: left; }
@@ -736,7 +736,7 @@ function buildPDF(data){
   var W=612,H=792,M=50;
   var enc=new TextEncoder();
   var t=data.t;
-  var dispW=150,dispH=Math.round(150*LOGO_H/LOGO_W);
+  var dispW=170,dispH=Math.round(170*LOGO_H/LOGO_W);
   var logoRaw=atob(LOGO);
   var logoArr=new Uint8Array(logoRaw.length);
   for(var i=0;i<logoRaw.length;i++) logoArr[i]=logoRaw.charCodeAt(i);
@@ -755,17 +755,17 @@ function buildPDF(data){
 
   function drawHeader(firstPage){
     // Logo: 150pt wide, ~104pt tall, placed top-left with margin
-    c.push(imgOp(M,H-M-dispH,dispW,dispH)); // top aligns with INVOICE title
+    c.push(imgOp(10,H-25-dispH,dispW,dispH)); // top of logo aligns with top of INVOICE text
     // Contact info below logo
     var contact=["Dan Skeen","410-952-2712","skeensound@gmail.com","200 Aigburth rd.","Towson, MD 21286"];
-    var cy=H-M-dispH-12;
-    for(var i=0;i<contact.length;i++){c.push(tx(contact[i],M,cy,"Helvetica",7.5,0.3));cy-=10;}
+    var cy=H-25-dispH-12;
+    for(var i=0;i<contact.length;i++){c.push(tx(contact[i],10,cy,"Helvetica",7.5,0.3));cy-=10;}
     // INVOICE / PROPOSAL title top right
-    c.push(txR(docType.toUpperCase(),W-M,H-M,"Helvetica",26,0));
-    if(data.invNum){c.push(txR("No. "+data.invNum,W-M,H-M-18,"Helvetica-Bold",10,0));}
+    c.push(txR(docType.toUpperCase(),W-M,H-55,"Helvetica",32,0));
+    if(data.invNum){c.push(txR("No. "+data.invNum,W-M,H-73,"Helvetica",10,0.2));}
     if(firstPage){
-      var ry=H-M-20;
-      if(data.invNum) ry=H-M-34;
+      var ry=H-87;
+      if(data.invNum) ry=H-87;
       if(data.client){c.push(txR("Client: "+data.client,W-M,ry,"Helvetica",9,0.2));ry-=13;}
       if(data.project){c.push(txR("Project: "+data.project,W-M,ry,"Helvetica",9,0.2));}
     }
