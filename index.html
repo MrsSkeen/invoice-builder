@@ -766,8 +766,8 @@ function buildPDF(data){
     if(firstPage){
       var ry=H-100;
       if(data.invNum) ry=H-114;
-      if(data.client){c.push(tx("Client: "+data.client,W-M-200,ry,"Helvetica",9,0.2));ry-=13;}
-      if(data.project){c.push(tx("Project: "+data.project,W-M-200,ry,"Helvetica",9,0.2));}
+      if(data.client){c.push(txR("Client: "+data.client,W-M,ry,"Helvetica",9,0.2));ry-=13;}
+      if(data.project){c.push(txR("Project: "+data.project,W-M,ry,"Helvetica",9,0.2));}
     }
     c.push(tx("Description",cols[0],tTop,"Helvetica-Bold",9,0));
     c.push(txR("Unit Cost",cols[1]+55,tTop,"Helvetica-Bold",9,0));
