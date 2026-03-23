@@ -800,11 +800,10 @@ function buildPDF(data){
     for(var i=0;i<contactLines.length;i++){c.push(tx(contactLines[i],logoX,cy,"Helvetica",8,0.35));cy-=13;}
     c.push(txR(data.docType.toUpperCase(),W-M,H-M-28,"Helvetica",32,0));
     var ryRight=H-M-52;
-    var infoX=W-M-195;
-    if(data.invNum){c.push(tx("No. "+data.invNum,infoX,ryRight,"Helvetica",10,0.2));ryRight-=14;}
+    if(data.invNum){c.push(txR("No. "+data.invNum,W-M,ryRight,"Helvetica",10,0.2));ryRight-=14;}
     if(firstPage){
-      if(data.client){c.push(tx("Client: "+data.client,infoX,ryRight,"Helvetica",9,0.2));ryRight-=14;}
-      if(data.project){c.push(tx("Project: "+data.project,infoX,ryRight,"Helvetica",9,0.2));}
+      if(data.client){c.push(txR("Client: "+data.client,W-M,ryRight,"Helvetica",9,0.2));ryRight-=14;}
+      if(data.project){c.push(txR("Project: "+data.project,W-M,ryRight,"Helvetica",9,0.2));}
     }
     c.push(hline(M,tableRight,tableHeaderY+12,1.5,0,0,0));
     c.push(tx("Description",cols[0],tableHeaderY,"Helvetica-Bold",9,0));
