@@ -825,7 +825,7 @@ function buildPDF(data){
     c.push(tx("Unit Cost",cols[1],tableHeaderY,"Helvetica-Bold",9,0));
     c.push(tx("Qty",cols[2],tableHeaderY,"Helvetica-Bold",9,0));
     c.push(tx("Days",cols[3],tableHeaderY,"Helvetica-Bold",9,0));
-    c.push(tx("Total",cols[4],tableHeaderY,"Helvetica-Bold",9,0));
+    c.push(txR("Total",tableRight,tableHeaderY,"Helvetica-Bold",9,0));
     c.push(hline(M,tableRight,tableHeaderY-3,1,0,0,0));
   }
 
@@ -848,7 +848,7 @@ function buildPDF(data){
     if(u) c.push(tx(u,cols[1],ry+5,"Helvetica",9,0.1));
     if(qty) c.push(tx(qty,cols[2],ry+5,"Helvetica",9,0.1));
     if(days) c.push(tx(days,cols[3],ry+5,"Helvetica",9,0.1));
-    if(total) c.push(tx(total,cols[4],ry+5,"Helvetica",9,0.1));
+    if(total) c.push(txR(total,tableRight,ry+5,"Helvetica",9,0.1));
     c.push(hline(M,tableRight,ry,0.4,0.8,0.8,0.8));
     ry-=rowH;
   }
@@ -874,7 +874,7 @@ function buildPDF(data){
   ry-=8;checkPage();
   c.push(hline(cols[3],tableRight,ry+rowH,1.5,0,0,0));
   c.push(tx("Total",cols[3],ry+5,"Helvetica-Bold",11,0));
-  c.push(tx("$"+t.grand.toFixed(2),cols[4],ry+5,"Helvetica-Bold",11,0));
+  c.push(txR("$"+t.grand.toFixed(2),tableRight,ry+5,"Helvetica-Bold",11,0));
   ry-=rowH+20;checkPage();
   c.push(tx(data.closingMsg,M,ry,"Helvetica",9,0.4));
   flushPage();
