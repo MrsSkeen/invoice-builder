@@ -775,7 +775,12 @@ function buildPDF(data){
 
   function esc(s){var o="";for(var i=0;i<s.length;i++){var cc=s.charCodeAt(i);if(cc===92||cc===40||cc===41)o+=String.fromCharCode(92)+s[i];else o+=s[i];}return o;}
   function tx(text,x,y,font,sz,gray){if(gray===undefined)gray=0;return "BT /"+font+" "+sz+" Tf "+gray.toFixed(2)+" g "+x.toFixed(1)+" "+y.toFixed(1)+" Td ("+esc(String(text))+") Tj ET";}
-  function txR(text,rx,y,font,sz,gray){var w=String(text).length*sz*0.52;return tx(text,rx-w,y,font,sz,gray);}
+  function txR(text,rx,y,font,sz,gray){
+    var HW={"A":667,"B":667,"C":722,"D":722,"E":667,"F":611,"G":778,"H":722,"I":278,"J":500,"K":667,"L":556,"M":833,"N":722,"O":778,"P":667,"Q":778,"R":722,"S":667,"T":611,"U":722,"V":667,"W":944,"X":667,"Y":667,"Z":611,"a":556,"b":556,"c":500,"d":556,"e":556,"f":278,"g":556,"h":556,"i":222,"j":222,"k":500,"l":222,"m":833,"n":556,"o":556,"p":556,"q":556,"r":333,"s":500,"t":278,"u":556,"v":500,"w":722,"x":500,"y":500,"z":500,"0":556,"1":556,"2":556,"3":556,"4":556,"5":556,"6":556,"7":556,"8":556,"9":556," ":278,".":278,",":278,":":278,"-":333,"$":556,"%":889,"(":333,")":333,"/":278};
+    var str=String(text);var w=0;
+    for(var i=0;i<str.length;i++){w+=(HW[str[i]]||556)*sz/1000;}
+    return tx(text,rx-w,y,font,sz,gray);
+  }
   function hline(x1,x2,y,lw,r,g,b){r=r||0;g=g||0;b=b||0;return lw.toFixed(2)+" w "+r.toFixed(2)+" "+g.toFixed(2)+" "+b.toFixed(2)+" RG "+x1.toFixed(1)+" "+y.toFixed(1)+" m "+x2.toFixed(1)+" "+y.toFixed(1)+" l S";}
   function fillRect(x,y,w,h,r,g,b){return r.toFixed(2)+" "+g.toFixed(2)+" "+b.toFixed(2)+" rg "+x.toFixed(1)+" "+y.toFixed(1)+" "+w.toFixed(1)+" "+h.toFixed(1)+" re f 0 0 0 rg";}
   function imgOp(x,y,w,h){return "q "+w.toFixed(1)+" 0 0 "+h.toFixed(1)+" "+x.toFixed(1)+" "+y.toFixed(1)+" cm /Logo Do Q";}
